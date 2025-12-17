@@ -1,28 +1,40 @@
 import os
 import json
-from openai import OpenAi
+from google import genai # Ath: breytt úr google.generativeai
 from dotenv import load_dotenv
 
-#lesa env skra
 load_dotenv()
-#client obj til að geta kallað a api
-client = OpenAi(api_key=os.getenv("OPEN_AI_KEY"))
 
-def analyze_text(text:str) -> dict:
-    prompt = f""" Þú ert aðstoðarmaður í gagnavinnslu. Greindu eftirfarandi athugasemd viðskiptavinar: "{text}" 
-    Skilaðu JSON-hlut með nákvæmlega þessum reitum: 
-    - sentiment: jákvætt, hlutlaust, eða neikvætt 
-    - summary: ein stutt setning á íslensku """
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.2, # lagt fyrir data pipeline
-    )
-    content = response.choices[0].message.content
+# Nýja leiðin til að búa til client
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+
+def analyze_text(text: str) -> dict:
+    prompt = f"""Greindu þessa athugasemd viðskiptavinar á íslensku: "{text}"
+
+Skilaðu JSON með nákvæmlega þessum reitum:
+- sentiment: notaðu "jákvætt", "hlutlaust", eða "neikvætt"
+- summary: stutt samantekt á íslensku (5-10 orð)
+
+Dæmi:
+{{"sentiment": "jákvætt", "summary": "Ánægður viðskiptavinur með hraða afhendingu"}}"""
+
     try:
-        return json.loads(content)
-    except json.JSONDecodeError:
+        # Nýtt format á köllum: models.generate
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt,
+            config=genai.types.GenerateContentConfig(
+                response_mime_type='application/json',
+                temperature=0.3
+            )
+        )
+
+        # Svarið er nálgast svona í nýja safninu
+        return json.loads(response.text)
+        
+    except Exception as e:
+        print(f"Villa í API kalli: {e}")
         return {
-        "sentiment": "óþekkt",
-        "summary": "Gat ekki greint svar gervigreindarinnar"
+            "sentiment": "óþekkt",
+            "summary": "Gat ekki greint svar gervigreindarinnar"
         }
