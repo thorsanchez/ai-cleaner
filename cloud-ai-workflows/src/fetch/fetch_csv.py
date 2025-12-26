@@ -1,20 +1,53 @@
 import pandas as pd
-from pathlib import Path
+import io
+import requests
 
-DATA_PATH = Path("data/customer_feedback.csv")
+#old real tickets
+CSV_URL = "https://raw.githubusercontent.com/stephen-talari/public/main/sample-servicenow-incidents.csv"
 
-def fetch_csv_feedback() -> pd.DataFrame:
+def fetch_csv_feedback(limit: int = 20) -> pd.DataFrame:
     """
-    Sækja customer feedback fra csv skra og skila datafram
+    Fetch frá public git
+    skilar datframe með ticket texta og metadata
     """
-    if not DATA_PATH.exists():
-        raise FileNotFoundError(
-            f"CSV finnst ekki {DATA_PATH}. "
-        )
+    try:
+        response = requests.get(CSV_URL, timeout=15)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        raise ConnectionError(f"Eror donwloading csv: {e}")
 
-    df = pd.read_csv(DATA_PATH)
+    # Lesa csv
+    df = pd.read_csv(io.StringIO(response.text))
 
-    if "feedback" not in df.columns:
-        raise ValueError("Vantar 'feedback' column i csv")
+    # short_description og description fyrir texta
+    required_cols = ['short_description', 'description']
+    missing = [col for col in required_cols if col not in df.columns]
+    if missing:
+        raise ValueError(f"Missing cols in csv: {missing}")
 
-    return df[["feedback"]]
+    # sameina fyrir llm input
+    df['title'] = df['short_description'].fillna("")
+    df['description'] = df['description'].fillna("")
+    df['text'] = df['title'] + "\n\n" + df['description']
+
+    # fleiri mikilvæg data
+    df.rename(columns={
+        "number": "ticket_id",
+        "priority": "reported_severity",
+        "category": "category"
+    }, inplace=True)
+
+    # hreinsa og limit
+    df = df.dropna(subset=['text'])
+    df['text'] = df['text'].str.strip()
+    df = df.head(limit)
+    df['source'] = "csv_servicenow_incidents"
+
+    cols = ['ticket_id', 'text', 'title', 'description', 'reported_severity', 'category', 'source']
+    return df[[col for col in cols if col in df.columns]]
+
+
+#Test
+if __name__ == "__main__":
+    df = fetch_csv_feedback(5)
+    print(df[['title', 'text']].head(3))
