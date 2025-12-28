@@ -1,0 +1,12 @@
+# Core dependencies
+pandas==2.1.4
+requests==2.31.0
+
+# AI / LLM
+google-genai==1.0.0
+
+# Environment management
+python-dotenv==1.0.0
+
+# Scheduling (for automation)
+schedule==1.2.0
