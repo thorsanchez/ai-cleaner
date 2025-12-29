@@ -56,17 +56,8 @@ class AlertService:
         """
         Alert til console
         """
-        severity_emoji = {
-            "critical": "🚨",
-            "high": "⚠️",
-            "medium": "ℹ️",
-            "low": "📝"
-        }
-        
-        emoji = severity_emoji.get(alert["severity"], "📝")
-        
         print("\n" + "="*60)
-        print(f"{emoji} ALERT: {alert['severity'].upper()} SEVERITY")
+        print(f"ALERT: {alert['severity'].upper()} SEVERITY")
         print("="*60)
         print(f"Time:     {alert['timestamp']}")
         print(f"ID:       {alert['incident_id']}")

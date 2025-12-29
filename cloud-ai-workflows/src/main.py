@@ -47,7 +47,7 @@ def run_pipeline():
     valid_df["category"] = [d["category"] for d in decisions]
 
     # Send alerts for critical/high severity incidents
-    print("\n🔔 Processing alerts...")
+    print("\nProcessing alerts...")
     for idx, (_, row) in enumerate(valid_df.iterrows()):
         incident_id = f"INC-{idx+1:03d}"
         alert_service.send_alert(
