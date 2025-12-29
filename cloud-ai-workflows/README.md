@@ -1,5 +1,8 @@
-# Sjálfvirkt kerfi sem notar gervigreind til að greina og forgangsraða viðskiptaatvik
 
+## NB kannski implement-a ef confidence < 0.7 þá senda sem medium og flag fyrir mannlega yfirferð??
+
+
+# Sjálfvirkt kerfi sem notar gervigreind til að greina og forgangsraða viðskiptaatvik
 ## Um Verkefnið
 
 - Sækir gögn frá mörgum stöðum (API, CSV skrár)
@@ -12,12 +15,21 @@
 ## Markmið
 
 Fyrirtæki fá þúsundir tickets, villa og endurgjafir á hverjum degi. Þetta kerfi:
+
 - forgangsraðar sjálfkrafa mikilvægum málum
 - Minnkar viðbragðstíma
 - gefur skipulagðar ákvarðanir (alvarleiki, flokkur, ráðlögð aðgerð)
 
 ## Project Structure
-![projectstructure](projectstructure.png)
+
+![projectstructure](./public/projectstructure.png)
+
+## Output
+![outputmain](./public/output.png)
+llm á það til að ofmeta alvarleika þegar vantar samhengi. Hér er td bara einn user sem nær ekki að tengjast við email server, sem á ekki að vera critical. Ég þarf annaðhvort reglur eða viðbótargögn til að styðja ákvörðunina.
+
+## AWS console
+![awsconsole](./public/awsconsole.png)
 
 ## Uppbygging
 
@@ -30,8 +42,8 @@ Gögn (git api, csv) -> Python gagnavinnsla -> llm -> Sjálfvirkar alerts
 - Terraform
 - AWS EC2
 
-
 ### Skilar
+
 ```json
 {
   "severity": "critical",
@@ -43,15 +55,16 @@ Gögn (git api, csv) -> Python gagnavinnsla -> llm -> Sjálfvirkar alerts
 ```
 
 ### Alvarleikastig dæmi:
-- **Critical** - Kerfi niðri 
+
+- **Critical** - Kerfi niðri
 - **High** - Stór villa, margir notendur, tekjuáhrif
 - **Medium** - Minniháttar villa
 - **Low** - Útlitsvilla, stakur notandi
 
-
-## AWS 
+## AWS
 
 Terraform býr til:
+
 - EC2 Instance
 - SSH
 - IAM Role
