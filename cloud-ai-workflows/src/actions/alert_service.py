@@ -2,6 +2,9 @@ from datetime import datetime
 from typing import Dict, Any, List
 import json
 
+# Confidence threshold fyrir manual review
+CONFIDENCE_THRESHOLD = 0.7
+
 
 class AlertService:
     """
