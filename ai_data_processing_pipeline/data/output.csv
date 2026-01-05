@@ -1,5 +1,5 @@
 id,comment,clean_text,sentiment,summary
-1,Frábær vara!!! Sendingin var samt of sein :(,frábær vara sendingin var samt of sein,jákvætt,Varan er frábær en sendingin var of sein.
-2,"Varan er í lagi, en þjónustan var SKELFING",varan er í lagi en þjónustan var skelfing,neikvætt,Varan var í lagi en þjónustan skelfileg.
-3,"Hröð afhending, gott verð",hröð afhending gott verð,jákvætt,Viðskiptavinur ánægður með hraða afhendingu og gott verð.
-4,Meh... bjóst við meiru fyrir þetta verð,meh bjóst við meiru fyrir þetta verð,neikvætt,Viðskiptavinur óánægður með verðmæti vörunnar miðað við verð.
+1,Frábær vara!!! Sendingin var samt of sein :(,frábær vara sendingin var samt of sein,neikvætt,Viðskiptavinur óánægður með seinkaða sendingu.
+2,"Varan er í lagi, en þjónustan var SKELFING",varan er í lagi en þjónustan var skelfing,neikvætt,Þjónustan við afhendingu var skelfileg.
+3,"Hröð afhending, gott verð",hröð afhending gott verð,jákvætt,Viðskiptavinur ánægður með hraða afhendingu.
+4,Meh... bjóst við meiru fyrir þetta verð,meh bjóst við meiru fyrir þetta verð,hlutlaust,Viðskiptavinur tjáir sig ekki um afhendingarþjónustu.

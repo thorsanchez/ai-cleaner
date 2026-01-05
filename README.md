@@ -6,6 +6,7 @@
 
 ### `ai_data_processing_pipeline/`
 Data processing pipeline sem les athugasemdir viðskiptavina úr CSV, hreinsar texta og notar Google Gemini AI fyrir sentiment analysis og samantekt á íslensku.
+![table](./public/Screenshot%202026-01-05%20at%2016.23.03.png)
 
 ### `ai_feedback/`
 Sækir athugasemdir viðskiptavina úr API, hreinsar textann og notar Google Gemini AI til að búa til markdown skýrslur sem greina sentiment og lykilatriði.

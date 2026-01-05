@@ -10,6 +10,9 @@ client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 def analyze_text(text: str) -> dict:
     prompt = f"""Greindu þessa athugasemd viðskiptavinar á íslensku: "{text}"
+    Mundu að við flytjum aðeins pakkana, við framleiðum / seljum ekki vöruna. 
+    Horfðu á það sem viðskiptavinurinn segir um afhendingu, hraða, 
+    þjónustu og ástand pakkans, ekki um gæði vörunnar.
 
 Skilaðu JSON með nákvæmlega þessum reitum:
 - sentiment: notaðu "jákvætt", "hlutlaust", eða "neikvætt"
