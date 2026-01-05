@@ -10,6 +10,7 @@ Data processing pipeline sem les athugasemdir viðskiptavina úr CSV, hreinsar t
 
 ### `ai_feedback/`
 Sækir athugasemdir viðskiptavina úr API, hreinsar textann og notar Google Gemini AI til að búa til markdown skýrslur sem greina sentiment og lykilatriði.
+![output](./ai_feedback/Screenshot%202026-01-05%20at%2016.36.29.png)
 
 ### `ai_insight-dashboard/`
 Streamlit dashboard sem safnar saman feedback frá mörgum stöðum og notar Google Gemini AI til að búa til insights með sentiment analysis og ráðleggingum.
