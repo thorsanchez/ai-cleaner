@@ -1,4 +1,5 @@
 import pandas as pd
+import seaborn as sns, matplotlib.pyplot as plt
 
 insurance_csv = "insurance.csv"
 nba_salary = "nba_2022-23_all_stats_with_salary.csv"
@@ -29,7 +30,10 @@ def univariate(df):
             kurt = df[col].kurt()
             
             output_df.loc[col] = [dtype, count, missing, unique, mode, min, q1, median, q3, max, mean, std, skew, kurt]
+            sns.histplot(data=df, x=col)
         else:
             output_df.loc[col] = [dtype, count, missing, unique, mode, '-', '-', '-', '-', '-', '-', '-', '-', '-']
+            sns.countplot(data=df, x=col)
+        plt.show()
     return output_df
 print(univariate(df))
