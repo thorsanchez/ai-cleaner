@@ -104,7 +104,7 @@ class AlertService:
         
         for decision in decisions:
             severity = decision.get("severity", "low")
-            severity_counts[severity] = severity_counts.get(severity, 0) + 1
+            severity_counts[severity] += 1
         
         print("BATCH PROCESSING SUMMARY")
         print("="*60)
