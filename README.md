@@ -4,6 +4,11 @@
 
 ## Verkefni
 
+### `cloud-ai-workflows/`
+
+Sjálfvirkt incident management kerfi sem sækir tickets úr mörgum áttum, notar AI til að flokka alvarleika atvika og sendir viðvaranir fyrir mikilvæg mál (deployed á AWS með Docker og Terraform).
+![output](./cloud-ai-workflows/public/output.png)
+
 ### `ai_data_processing_pipeline/`
 
 Data processing pipeline sem les athugasemdir viðskiptavina úr CSV, hreinsar texta og notar Google Gemini AI fyrir sentiment analysis og samantekt á íslensku.
@@ -24,8 +29,3 @@ Streamlit dashboard sem safnar saman feedback frá mörgum stöðum og notar Goo
 Dynamic univariate analysis sem er automated og virkar fyrir hvaða pandas DataFrame sem er
 ![output](./automation-statistics/Screenshot5.1.png)
 ![output](./automation-statistics/Screenshot5.2-2.png)
-
-### `cloud-ai-workflows/`
-
-Sjálfvirkt incident management kerfi sem sækir tickets úr mörgum áttum, notar AI til að flokka alvarleika atvika og sendir viðvaranir fyrir mikilvæg mál (deployed á AWS með Docker og Terraform).
-![output](./cloud-ai-workflows/public/output.png)
